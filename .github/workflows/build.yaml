@@ -63,16 +63,19 @@ jobs:
     strategy:
       matrix:
         image: [ boilerplate ]
+    env:
+      CONTEXT_DIR: ${{ matrix.image }}
+      CODER_TEMPLATE_NAME: ${{ matrix.image }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
       - run: |
-          cd template
+          cd ${CONTEXT_DIR}/template
           tar -cvf ../template.tar *
 
       - name: Upload template
         uses: actions/upload-artifact@v3
         with:
-          name: coder-template
-          path: template.tar
+          name: ${{ env.CODER_TEMPLATE_NAME }}
+          path: ${{ env.CONTEXT_DIR }}/template.tar
