@@ -64,18 +64,19 @@ jobs:
       matrix:
         image: [ boilerplate ]
     env:
-      CONTEXT_DIR: ${{ matrix.image }}
       CODER_TEMPLATE_NAME: ${{ matrix.image }}
+      CONTAINER_IMAGE: ${{ env.REGISTRY }}/${{ github.repository }}-${{ matrix.image }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
       - run: |
-          cd ${CONTEXT_DIR}/template
-          tar -cvf ../template.tar *
+          cd coder-template
+          sed -i "s|CONTAINER_IMAGE|${CONTAINER_IMAGE}|g" main.tf
+          tar -cvf ../${CODER_TEMPLATE_NAME}.tar *
 
       - name: Upload template
         uses: actions/upload-artifact@v3
         with:
           name: ${{ env.CODER_TEMPLATE_NAME }}
-          path: ${{ env.CONTEXT_DIR }}/template.tar
+          path: ${{ env.CODER_TEMPLATE_NAME }}.tar
