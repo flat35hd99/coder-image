@@ -5,7 +5,7 @@ USER root
 # Add trusted SSH key fingerprints
 COPY --chown=coder:coder ./known_hosts /home/coder/.ssh/known_hosts
 RUN mkdir -p /home/coder/.local/bin/ \
-    && ln -s /usr/bin/python3 /home/coder/.local/bin/python
+    && ln -s /usr/bin/python3 /home/coder/.local/bin/python \
     && chown coder:coder \
         /home/coder/.local \
         /home/coder/.local/bin/ \
