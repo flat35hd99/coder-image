@@ -28,7 +28,7 @@ jobs:
       packages: write
     strategy:
       matrix:
-        image: [ boilerplate ]
+        image: [ boilerplate, rust ]
     env:
       IMAGE_NAME: ${{ github.repository }}-${{ matrix.image }}
       CONTEXT_DIR: ${{ matrix.image }}
@@ -62,7 +62,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        image: [ boilerplate ]
+        image: [ boilerplate, rust ]
     env:
       CODER_TEMPLATE_NAME: ${{ matrix.image }}
     steps:
