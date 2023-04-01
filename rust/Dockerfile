@@ -11,7 +11,7 @@ ENV PATH="$PATH:/home/coder/.local/bin"
 RUN apt-get update -y -qq \
     && apt-get install -y -qq \
         wget \
-        gcc \
+        build-essential \
     && apt-get clean
 
 USER 1000
